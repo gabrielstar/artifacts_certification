@@ -10,16 +10,6 @@ services:
     volumes:
       - "jenkins:/var/jenkins_home"
 
-  artifactory:
-    image: "docker.bintray.io/jfrog/artifactory-oss:latest"
-    networks:
-      - ci_net
-    ports:
-      - "8086:8081"
-    volumes:
-      - "/Users/gs/arty:/var/opt/jfrog/artifactory"
-
-
 volumes:
   jenkins:
 networks:

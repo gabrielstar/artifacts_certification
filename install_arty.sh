@@ -9,10 +9,10 @@ download_if_not_present() { #download _file if not already present on the disk
     echo "$_file exist, OK"
   else
     echo "$_file not present. Downloading from $_url"
-    c_url -O -L $_url
+    curl -O -L $_url
     status=$?
     if [ $status -ne 0 ]; then
-      echo "Downloading of dependency failed: $_file. Please update download URL in jenkins-up.sh script"
+      echo "Downloading of dependency failed: $_file. Please update download URL in script"
       exit 1
     fi
   fi
@@ -29,7 +29,7 @@ function install_artifactory() { #unpack and install on the system
   cp "$_downloads_folder/$_file" "$_install_folder/"
   pushd "$_install_folder"
   tar -xvf $_file
-  local _folder="artifactory-oss-$_version"
+  local _folder="artifactory-pro-$_version"
   rm -rf artifactory
   mv "$_folder" artifactory
   chmod -R 777 "$JFROG_HOME/artifactory/var" #required for MacOS as not officially supported by JFrog
@@ -52,8 +52,8 @@ function run(){
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   DOWNLOADS_FOLDER="$HOME/Downloads"
   ARTIFACTORY_VERSION="7.33.8"
-  DOWNLOAD_FILE="jfrog-artifactory-oss-$ARTIFACTORY_VERSION-darwin.tar.gz"
-  ARTIFACTORY_DOWNLOAD_URL="https://releases.jfrog.io/artifactory/bintray-artifactory/org/artifactory/oss/jfrog-artifactory-oss/$ARTIFACTORY_VERSION/$DOWNLOAD_FILE"
+  DOWNLOAD_FILE="jfrog-artifactory-pro-$ARTIFACTORY_VERSION-darwin.tar.gz"
+  ARTIFACTORY_DOWNLOAD_URL="https://releases.jfrog.io/artifactory/artifactory-pro/org/artifactory/pro/jfrog-artifactory-pro/$ARTIFACTORY_VERSION/$DOWNLOAD_FILE"
   INSTALL_FOLDER="$HOME/jfrog"
 
   run "$@"
