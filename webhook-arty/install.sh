@@ -1,10 +1,9 @@
 set -x
 
 INSTALL_FOLDER="$HOME/jfrog"
-cp webhook* "$INSTALL_FOLDER/artifactory/var/etc/artifactory/plugins"
-cp webhook* "$INSTALL_FOLDER/arti/var/etc/artifactory/plugins"
-curl -X POST -u admin:password http://localhost:8081/artifactory/api/plugins/reload
+ARTI_USER=admin
+ARTI_PASS=password
 
-#trigger job like this
-curl -u user:pass http://localhost:8085/generic-webhook-trigger/invoke\?token\=a
+cp webhook* "$INSTALL_FOLDER/artifactory/var/etc/artifactory/plugins"
+curl -X POST -u $ARTI_USER:$ARTI_PASS http://localhost:8081/artifactory/api/plugins/reload
 

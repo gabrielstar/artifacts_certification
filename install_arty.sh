@@ -1,12 +1,13 @@
 set -e
 download_if_not_present() { #download _file if not already present on the disk
 
-  local _file=$1
-  local _url=$2
+  local _folder=$1
+  local _file=$2
+  local _url=$3
 
   echo "Provided $_file and $_url"
-  if test -f "$_file"; then
-    echo "$_file exist, OK"
+  if test -f "$_folder/$_file"; then
+    echo "$_file exist in $_folder, OK"
   else
     echo "$_file not present. Downloading from $_url"
     curl -O -L $_url
@@ -15,6 +16,7 @@ download_if_not_present() { #download _file if not already present on the disk
       echo "Downloading of dependency failed: $_file. Please update download URL in script"
       exit 1
     fi
+    mv $_file $_folder/$file
   fi
 }
 
@@ -41,7 +43,7 @@ function install_artifactory() { #unpack and install on the system
 
 function run(){
   echo "Let us download Artifactory from $ARTIFACTORY_DOWNLOAD_URL"
-  download_if_not_present "$DOWNLOADS_FOLDER/$DOWNLOAD_FILE" "$ARTIFACTORY_DOWNLOAD_URL"
+  download_if_not_present "$DOWNLOADS_FOLDER" "$DOWNLOAD_FILE" "$ARTIFACTORY_DOWNLOAD_URL"
   install_artifactory "$DOWNLOADS_FOLDER" "$DOWNLOAD_FILE" "$INSTALL_FOLDER" "$ARTIFACTORY_VERSION"
 
   echo "You can start Artifactory by running 'export JFROG_HOME=$INSTALL_FOLDER && sh $JFROG_HOME/artifactory/app/bin/artifactoryctl'"
