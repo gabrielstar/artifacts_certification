@@ -26,8 +26,8 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   ARTI_URL="http://localhost"
   ARTI_PORT="8081"
   REPOSITORY="example-repo-local"
-  ARTIFACT="dai/10.0.1/mojo/mojo.zip"
-  ARTIFACT_NAME=mojo.zip
+  ARTIFACT_NAME=mojo2.zip
+  ARTIFACT="dai/10.0.1/mojo/$ARTIFACT_NAME"
   PROPS="mlops-0.53=unknown;mlops-0.54=unknown;type=mojo;produced=dai"
   UPDATED_PROPS="mlops-0.53=certified"
   deploy && download && update_property $UPDATED_PROPS && remove_download 5

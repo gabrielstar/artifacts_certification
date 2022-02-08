@@ -1,4 +1,5 @@
 set -x
+# https://www.eficode.com/blog/triggering-jenkins-pipelines-on-artifactory-events
 
 INSTALL_FOLDER="$HOME/jfrog"
 ARTI_USER=admin
