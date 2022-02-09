@@ -14,7 +14,7 @@ venv:
 
 .PHONY: setup
 setup: venv
-	./venv/bin/pip3 install -r requirements.txt
+	./venv/bin/python3 -m pip install -r requirements.txt
 
 create-reports-dir:
 	mkdir -p $(REPORTS_DIR)
