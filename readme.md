@@ -45,3 +45,13 @@ jobs, artifact properties will be updated.
 
 
 
+## Generate report
+
+```bash
+report.py --mlops_versions mlops-0.53 mlops-0.54 --dai_version=10.0.1 --repo="example-repo-local/dai" --artifactory_url="http://localhost:8081/artifactory" --artifactory_user=... --artifactory_password=...
+
+```
+You can also use make commands:
+```bash
+    make setup && make run
+```

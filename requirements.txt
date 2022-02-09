@@ -1,0 +1,4 @@
+requests
+typing
+pretty_html_table
+pandas

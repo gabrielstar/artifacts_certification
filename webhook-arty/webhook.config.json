@@ -1,0 +1,10 @@
+{
+  "webhooks": {
+      "mywebhookname": {
+          "url": "http://localhost:8085/generic-webhook-trigger/invoke?token=dai_certification",
+          "events": [
+            "storage.afterCreate"
+          ]
+      }
+  }
+}
