@@ -17,7 +17,7 @@ pipeline {
         }
         stage("Generate report"){
             steps(){
-                sh("make run MLOPS_VERSIONS=$MLOPS_VERSIONS ARTIFACTORY_URL=$ARTIFACTORY_URL")
+                sh("make run MLOPS_VERSIONS='$MLOPS_VERSIONS' ARTIFACTORY_URL=$ARTIFACTORY_URL")
             }
         }
         stage("Publish report"){
