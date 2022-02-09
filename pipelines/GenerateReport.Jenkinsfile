@@ -3,7 +3,7 @@ pipeline {
     parameters {
         string(name: 'REPORT_ARTIFACT_PATH', defaultValue: 'example-repo-local/dai/10.0.1/report.html', description: 'Where to store report?')
         string(name: 'ARTIFACTORY_URL', defaultValue: 'http://host.docker.internal:8081/artifactory', description: 'Artifactory URL')
-        string(name: 'MLOPS_VERSION', defaultValue: '0.55')
+        string(name: 'MLOPS_VERSION', defaultValue: 'mlops-0.54 mlops-0.55')
         password(name: 'ARTIFACTORY_USER', defaultValue: 'admin')
         password(name: 'ARTIFACTORY_PASS', defaultValue: 'password')
 
@@ -17,7 +17,7 @@ pipeline {
         }
         stage("Generate report"){
             steps(){
-                sh("make run ARTIFACTORY_URL=$ARTIFACTORY_URL")
+                sh("make run MLOPS_VERSION=$MLOPS_VERSION ARTIFACTORY_URL=$ARTIFACTORY_URL")
             }
         }
         stage("Publish report"){
