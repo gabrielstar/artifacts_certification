@@ -53,7 +53,7 @@ pipeline {
       }
     }
   }
-  stage ('Generate Report) {
+  stage ('Generate Report') {
           steps{
               build job: 'GenerateCompatibilityReport', propagate: true,
               parameters: [
