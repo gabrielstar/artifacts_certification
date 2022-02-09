@@ -17,11 +17,11 @@ pipeline {
         }
         stage("Generate report"){
             steps(){
-                sh("make run --artifactory_url=$ARTIFACTORY_URL")
+                sh("make run ARTIFACTORY_URL=$ARTIFACTORY_URL")
                 archiveArtifacts artifacts: "certification-report/report.html", fingerprint: true
             }
         }
-        stage("Deploy report to Artifactiory"){
+        stage("Deploy report to Artifactory"){
             steps(){
                 sh("curl -X PUT -u $ARTIFACTORY_USER:$ARTIFACTORY_PASS $ARTIFACTORY_URL/$ARTIFACT_PATH -T certification-report/report.html")
             }
