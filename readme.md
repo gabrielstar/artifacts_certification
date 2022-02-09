@@ -37,9 +37,9 @@ After that, go to Jenkins->Manage Plugins and install:
 At this stage whenever an artifact gets deployed to Artifactory a Hook API call will be sent to Jenkins to notify it of an event.
 Now it is time for Jenkins pipeline.
 
-* First, create new Pipeline job from [DAICertificationTestforMLOPS.Jenkinsfile](pipelines/DAICertificationTestforMLOPS.Jenkinsfile) with a name of
+* First, create new Pipeline job from [DAICertificationTestforMLOPS.Jenkinsfile](ci/DAICertificationTestforMLOPS.Jenkinsfile) with a name of
 "DAI Artifact Certification Test for MLOPS"
-* Second, create new Pipeline job from [CertificationJob.Jenkinsfile](pipelines/CertificationJob.Jenkinsfile)
+* Second, create new Pipeline job from [CertificationJob.Jenkinsfile](ci/CertificationJob.Jenkinsfile)
 with a name of "Pipeline Certification-Job"
 
 Now, deploy an artifact to Arty with [test_deploy.sh](testing/test_deploy.sh). You should see Arty notyfying Jenkins and on successful 
