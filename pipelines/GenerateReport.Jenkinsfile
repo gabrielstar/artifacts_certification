@@ -22,7 +22,7 @@ pipeline {
         }
         stage("Deploy report to Artifactiory"){
             steps(){
-                sh("curl -X PUT -u $ARTIFACTORY_USER:$ARTIFACTORY_PASS $ARTIFACT_PATH -T certification-report/report.html")                    ")
+                sh(curl -X PUT -u $ARTIFACTORY_USER:$ARTIFACTORY_PASS $ARTIFACT_PATH -T certification-report/report.html")
             }
         }
     }
