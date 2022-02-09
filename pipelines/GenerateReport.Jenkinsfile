@@ -1,7 +1,8 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'ARTIFACT_PATH', defaultValue: 'http://host.docker.internal:8081/artifactory/example-repo-local/dai/10.0.1/report.html', description: 'Artifact to run tests againts?')
+        string(name: 'REPORT_ARTIFACT_PATH', defaultValue: '/example-repo-local/dai/10.0.1/report.html', description: 'Where to store report?')
+        string(name: 'ARTIFACTORY_URL', defaultValue: 'http://host.docker.internal:8081/artifactory', description: 'Artifactory URL')
         string(name: 'MLOPS_VERSION', defaultValue: '0.55')
         password(name: 'ARTIFACTORY_USER', defaultValue: 'admin')
         password(name: 'ARTIFACTORY_PASS', defaultValue: 'password')
@@ -16,13 +17,13 @@ pipeline {
         }
         stage("Generate report"){
             steps(){
-                sh("make run")
+                sh("make run --artifactory_url=$ARTIFACTORY_URL")
                 archiveArtifacts artifacts: "certification-report/report.html", fingerprint: true
             }
         }
         stage("Deploy report to Artifactiory"){
             steps(){
-                sh("curl -X PUT -u $ARTIFACTORY_USER:$ARTIFACTORY_PASS $ARTIFACT_PATH -T certification-report/report.html")
+                sh("curl -X PUT -u $ARTIFACTORY_USER:$ARTIFACTORY_PASS $ARTIFACTORY_URL/$ARTIFACT_PATH -T certification-report/report.html")
             }
         }
     }
