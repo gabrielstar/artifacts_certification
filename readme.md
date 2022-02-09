@@ -27,7 +27,9 @@ You can verify it all works by trying to [upload a test artifact](testing/test_d
     docker compose up
 ```
 Open browser at localhost:8085 and install suggested plugins. Configure `user:pass` as credentials.
-After that, go to Jenkins->Manage Plugins and install Generic Webhook Trigger plugin
+After that, go to Jenkins->Manage Plugins and install:
+- Generic Webhook Trigger plugin
+- HTML Publisher plugin
 
 
 ## Jenkins pipeline
