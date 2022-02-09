@@ -55,7 +55,7 @@ pipeline {
 
     stage ('Generate Report') {
           steps{
-              build job: 'GenerateCompatibilityReport', propagate: true,
+              build job: 'CompatibilityReport', propagate: true,
               parameters: [
                   [$class: 'StringParameterValue', name: 'MLOPS_VERSIONS', value: "${params.MLOPS_VERSION}" ]
               ]
