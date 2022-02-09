@@ -52,15 +52,13 @@ pipeline {
         sh('curl -X PUT -sSf -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASS} -O ${ARTIFACTORY_URL}/api/storage/${artifact_repo}/${artifact_path}?properties=mlops-${MLOPS_VERSION}=certified')
       }
     }
-  }
-  stage ('Generate Report') {
+
+    stage ('Generate Report') {
           steps{
               build job: 'GenerateCompatibilityReport', propagate: true,
               parameters: [
-                  [$class: 'StringParameterValue', name: 'MLOPS_VERSIONS'
-                      , value: "${params.MLOPS_VERSION}" ]
+                  [$class: 'StringParameterValue', name: 'MLOPS_VERSIONS', value: "${params.MLOPS_VERSION}" ]
               ]
           }
-      }
-   }
+    }
 }
