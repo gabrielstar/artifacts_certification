@@ -37,7 +37,7 @@ pipeline {
     }
     stage ('Starting Certification Tests') {
         steps{
-            build job: 'DAI Artifact Certification Test for MLOPS', propagate: true,
+            build job: 'CertificationTest', propagate: true,
             parameters: [
                 [$class: 'StringParameterValue', name: 'ARTIFACT_PATH'
                     , value: "${ARTIFACTORY_URL}/${artifact_repo}/{$artifact_path}" ],
