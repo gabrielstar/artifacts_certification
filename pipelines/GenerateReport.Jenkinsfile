@@ -18,7 +18,18 @@ pipeline {
         stage("Generate report"){
             steps(){
                 sh("make run ARTIFACTORY_URL=$ARTIFACTORY_URL")
-                archiveArtifacts artifacts: "certification-report/report.html", fingerprint: true
+            }
+        }
+        stage("Publish report"){
+            steps(){
+               archiveArtifacts artifacts: "certification-report/report.html", fingerprint: true
+               publishHTML (target : [allowMissing: false,
+                alwaysLinkToLastBuild: true,
+                keepAll: true,
+                reportDir: 'certification-report',
+                reportFiles: 'report.html',
+                reportName: 'DAI-MLOPS Compatibility report',
+                reportTitles: 'DAI-MLOPS Compatibility report'])
             }
         }
         stage("Deploy report to Artifactory"){
