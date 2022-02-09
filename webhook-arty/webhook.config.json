@@ -1,10 +1,14 @@
 {
   "webhooks": {
-      "mywebhookname": {
+      "jenkins": {
           "url": "http://localhost:8085/generic-webhook-trigger/invoke?token=dai_certification",
           "events": [
             "storage.afterCreate"
-          ]
+          ],
+          "repositories": [
+            "example-repo-local"
+          ],
+         "path": "dai/10.0.1/mojo/*"
       }
   }
 }
