@@ -55,18 +55,19 @@ class ArtifactoryHTTPClient():
             items = res.json()
             if 'files' in items:
                 for item in items['files']:
-                    res = self.get_item_properties(item['uri'])
-                    row = []
-                    for version in mlops_versions:
-                        if res.status_code == 200 and version in res.json()['properties']:
-                            status = res.json()['properties'][version][0]
-                            row.append(status)
-                            if status != self.STATUS_ARTIFACT_CERTIFIED:
+                    if str(item['uri']).endswith(".zip"):
+                        res = self.get_item_properties(item['uri'])
+                        row = []
+                        for version in mlops_versions:
+                            if res.status_code == 200 and version in res.json()['properties']:
+                                status = res.json()['properties'][version][0]
+                                row.append(status)
+                                if status != self.STATUS_ARTIFACT_CERTIFIED:
+                                    mlops_version_statuses[version] = self.STATUS_FAILED
+                            else:
+                                row.append(self.STATUS_ARTIFACT_UNVERIFIED)
                                 mlops_version_statuses[version] = self.STATUS_FAILED
-                        else:
-                            row.append(self.STATUS_ARTIFACT_UNVERIFIED)
-                            mlops_version_statuses[version] = self.STATUS_FAILED
 
-                    data.append([item['uri'], *row])
+                        data.append([item['uri'], *row])
                 data.append(["", *mlops_version_statuses.values()])
         return data
