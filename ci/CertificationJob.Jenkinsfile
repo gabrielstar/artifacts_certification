@@ -50,7 +50,7 @@ pipeline {
     stage('Update properties') {
       steps {
         sh "echo 'Running update on artifact ${ARTIFACTORY_URL}/${artifact_repo}/${artifact_path}'"
-        sh('curl -X PUT -sSf -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASS} -O ${ARTIFACTORY_URL}/api/storage/${artifact_repo}/${artifact_path}?properties=mlops-${MLOPS_VERSION}=certified')
+        sh('curl -X PUT -sSf -u ${ARTIFACTORY_USER}:${ARTIFACTORY_PASS} -O ${ARTIFACTORY_URL}/api/storage/${artifact_repo}/${artifact_path}?properties=${MLOPS_VERSION}=certified')
       }
     }
 
