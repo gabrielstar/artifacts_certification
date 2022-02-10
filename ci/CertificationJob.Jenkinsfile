@@ -7,7 +7,8 @@ pipeline {
         string(name: "artifact_path", defaultValue: "dai/10.0.1/mojo/mojo.zip")
         string(name: "artifact_name", defaultValue: "mojo.zip")
         string(name: "info", defaultValue: "Manually Triggered")
-        string(name: "MLOPS_VERSION", defaultValue: "mlops-0.56 mlops-0.55")
+        string(name: "MLOPS_VERSION", defaultValue: "mlops-0.54"),
+        string(name: "MLOPS_VERSIONS_FOR_REPORT", defaultValue: "mlops-0.53 mlops-0.54 mlops-0.55 mlops-0.56")
   }
   triggers {
     GenericTrigger(
@@ -57,7 +58,7 @@ pipeline {
           steps{
               build job: 'GenerateCompatibilityReport', propagate: true,
               parameters: [
-                  [$class: 'StringParameterValue', name: 'MLOPS_VERSIONS', value: "${params.MLOPS_VERSION}" ]
+                  [$class: 'StringParameterValue', name: 'MLOPS_VERSIONS', value: "${params.MLOPS_VERSIONS_FOR_REPORT}" ]
               ]
           }
     }
