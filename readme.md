@@ -25,6 +25,13 @@ You can verify it all works by trying to [upload a test artifact](testing/test_d
 
 ```bash
     docker compose up
+    # install docker for docker
+    docker exec -it --user root artifacts_certification-jenkins-1 bash
+    root@08e45ab0cec7:/# 
+    curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
+    docker run hello-world
+
+    
 ```
 Open browser at localhost:8085 and install suggested plugins. Configure `user:pass` as credentials.
 After that, go to Jenkins->Manage Plugins and install:
