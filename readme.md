@@ -30,6 +30,9 @@ You can verify it all works by trying to [upload a test artifact](testing/test_d
     root@08e45ab0cec7:/# 
     curl https://get.docker.com/ > dockerinstall && chmod 777 dockerinstall && ./dockerinstall
     docker run hello-world
+    usermod -a -G docker jenkins
+    su jenkins
+    docker run hello-world
 
     
 ```
